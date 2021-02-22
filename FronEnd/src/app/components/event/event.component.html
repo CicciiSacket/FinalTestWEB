@@ -1,0 +1,8 @@
+<router-outlet></router-outlet>
+<div >
+    <h1>Eventi in evidenza</h1>
+    <h5 *ngFor = "let e of events">{{e.name | titlecase}}</h5>
+    <button (click) = "prev()"  *ngIf = "isVisiblePrev">prev</button>
+    <button (click) = "next()" *ngIf = "isVisibleNext">next</button>
+</div>
+

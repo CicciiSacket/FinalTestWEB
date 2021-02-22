@@ -1,0 +1,11 @@
+<h2>Categorie</h2>
+<div class="row justify-content-center">
+    <div class="card col-4"  *ngFor = "let t of types">
+          <img class="card-img-top" src="{{t.img}}" alt="Card image cap">
+          <div class="card-body">
+          <h5 class="card-title">{{t.name | titlecase}}</h5>
+          <p class="card-text">{{t.description}}</p>
+          <button class="btn btn-primary" ><a  href = "{{t.link}}" style="color:white">Discover more </a></button>
+          </div>      
+    </div> 
+</div>

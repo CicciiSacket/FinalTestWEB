@@ -1,0 +1,99 @@
+<h1>Ciao {{user.name}}!</h1>
+<h2>Informazioni personali:</h2>
+<div class="row">
+    <div class="card, col-3" style="width: 18rem;">
+        <img class="card-img-top" src="https://st.depositphotos.com/1779253/5140/v/600/depositphotos_51405259-stock-illustration-male-avatar-profile-picture-use.jpg" alt="Card image cap">
+        <div class="card-body">
+        <div class="form-group">
+            <input  type="text" name ="name"  class="form-control info" placeholder="{{user.name}}"  [(ngModel)] = "name">
+        </div>
+        <div class="form-group">
+            <input  type="text" name ="username"  class="form-control info" placeholder="{{user.username}}"  [(ngModel)] = "username">
+        </div>
+        <div class="form-group">
+            <input  type="text" name ="password"  class="form-control info" placeholder="{{user.password}}"  [(ngModel)] = "password">
+        </div>
+        <p class="card-text">Admin: {{user.admin}}</p>
+        <p class="card-text">Biglietti acquistati: {{user.tickets.length}}</p>
+        <p class="text-danger">{{errorMessage}}</p>
+        <button class="btn btn-success btn-sm" (click)='modifyUser()'>Modifica</button>
+        </div>
+    </div>
+    
+    <table class="table, col-8">
+        <thead>
+        <tr>
+            <th scope="col">Evento</th>
+            <th scope="col">Luogo</th>
+            <th scope="col">Data</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr  *ngFor ="let t of tickets; let i = index">
+            <th scope="row">{{t.event.name}}</th>
+            <td>{{t.event.place}}</td>
+            <td>{{t.event.dateTime}}</td>
+            <button class="btn btn-danger btn-sm" (click)='removeTicket(i)'>Rimuovi</button>
+            <br><br>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div *ngIf = "user.admin">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="form_main">
+                        <h4 class="heading"><strong>Crea Nuovo Evento</strong></h4>
+                    <div class="form">
+                        <form>
+                            <input type="text" required="" placeholder="Nome evento" value="" name="eventName" class="txt"  [(ngModel)] = "eventName">
+                            <input type="text" required="" placeholder="Luogo" value="" name="place" class="txt" [(ngModel)] = "place">
+                            <input type="text" required="" placeholder="Prezzo" value="" name="email" class="txt" [(ngModel)] = "price">
+                            Tipo: <select name="type" [(ngModel)] = "type">
+                                <option value="music">Musica</option>
+                                <option value="theatre">Teatro</option>
+                                <option value="sport">Sport</option>
+                            </select>
+                            <input name="dateTime" type="date" data-date-format="dd/mm/yyyy" [(ngModel)] = "dateTime">
+                            <p class="text-danger">{{errorEventMessage}}</p>
+                            <input type="submit" value="crea" name="submit" class="txt2"  (click) = "createEvent()">
+                        </form>
+                    </div>
+                </div>
+            </div> 
+            
+            <div class="col-md-4">
+                <div class="form_main">
+                        <h4 class="heading"><strong>Promuovi/Rimuovi Admin</strong></h4>
+                    <div class="form">
+                        <form>
+                            <input type="text" required="" placeholder="Username" name="usernameToPromove" class="txt"  [(ngModel)] = "usernameToPromove">
+                            Admin: <input name = "admin" type="checkbox" [(ngModel)] = "admin">
+                            <br>
+                            <p class="text-danger">{{errorModifyAdmin}}</p>
+                            <input type="submit" value="fatto" name="submit" class="txt2"  (click) = "makeAdmin()">
+                        </form>
+                    </div>
+                </div>
+            </div>        
+            <div class="col-md-4">
+                <div class="form_main">
+                        <h4 class="heading"><strong>Elimina evento </strong></h4>
+                    <div class="form">
+                        <form>
+                            <input type="text" required="" placeholder="event Id" value="" name="eventId" class="txt"  [(ngModel)] = "eventId">
+                            <p class="text-danger">{{errorDeleteEvent}}</p>
+                            <input type="submit" value="elimina" name="submit" class="txt2"  (click) = "deleteEvent()">
+                        </form>
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </div>
+</div>
+
+
+
